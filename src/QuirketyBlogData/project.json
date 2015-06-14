@@ -1,0 +1,37 @@
+﻿{
+    "userSecretsId": "aspnet5-QuirketyBlogData-20150526103127",
+    "version": "1.0.2-*",
+    "description": "Library for storing web content as Markdown files with JSON headers. Used in QuirketyBlog.",
+    "authors": [ "jeffa" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "Newtonsoft.Json": "7.0.1-beta3",
+        "MarkdownDeep.NET": "1.5.0",
+        "CommonMark.NET": "0.9.0"
+    },
+
+    "frameworks": {
+        "dnx451": { },
+        "dnxcore50": {
+            "dependencies": {
+                "System.Collections": "4.0.10-beta-22816",
+                "System.Linq": "4.0.0-beta-22816",
+                "System.Threading": "4.0.10-beta-22816",
+                "System.Threading.Timer": "4.0.0-beta-22816",
+                "System.Threading.Tasks.Parallel": "4.0.0-beta-22816",
+                "Microsoft.CSharp": "4.0.0-beta-22816",
+                "System.Text.RegularExpressions": "4.0.10-beta-22816",
+                "System.Collections.Concurrent": "4.0.10-beta-22816",
+                "System.IO": "4.0.10-beta-22816",
+                "System.Runtime": "4.0.20-beta-22816",
+                "System.IO.FileSystem": "4.0.0-beta-22816",
+                "System.Globalization": "4.0.10-beta-22816",
+                "System.Globalization.Extensions": "4.0.0-beta-22816",
+                "System.Linq.Queryable": "4.0.0-beta-22816"
+            }
+        }
+    }
+}
