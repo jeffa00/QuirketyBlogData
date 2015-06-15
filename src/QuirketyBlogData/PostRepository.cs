@@ -49,7 +49,7 @@ namespace QuirketyBlogData
 
             LoadAllPosts();
 
-            CopyContentFiles();
+            CopyFiles();
             CopyViewFiles();
 
             _timer = new Timer(_timer_Elapsed, null, 0, 6000);
@@ -57,12 +57,12 @@ namespace QuirketyBlogData
 
         private void CopyViewFiles()
         {
-            CopyContentDir(SrcDir + "files\\views\\", ViewDir);
+            CopyContentDir(SrcDir + "views\\", ViewDir);
         }
 
-        private void CopyContentFiles()
+        private void CopyFiles()
         {
-            CopyContentDir(SrcDir + "files\\content\\", ContentDir);
+            CopyContentDir(SrcDir + "files\\", ContentDir);
         }
 
         public void PublishContentFiles()
@@ -163,7 +163,7 @@ namespace QuirketyBlogData
         {
             _timer.Change(Timeout.Infinite, Timeout.Infinite);
             LoadAllPosts();
-            CopyContentFiles();
+            CopyFiles();
             //CopyViewFiles();
 
             _timer.Change(0, 6000);
@@ -182,7 +182,7 @@ namespace QuirketyBlogData
 
             foreach (var file in currentFiles)
             {
-                if (Posts.ContainsKey(file) == false)
+                if (Posts.ContainsKey(file.ToLower()) == false)
                     DeletePost(file);
             }
 
@@ -228,7 +228,7 @@ namespace QuirketyBlogData
             {
                 string fileContents = File.ReadAllText(file);
 
-                AddPost(file, new Post(file, file.Replace(dirPath, "").Replace(".html", "").Replace(".md", ""), DefaultProcessor, fileContents));
+                AddPost(file.ToLower(), new Post(file, file.Replace(dirPath, "").Replace(".html", "").Replace(".md", ""), DefaultProcessor, fileContents));
                 currentFiles.Add(file);
             });
 
@@ -350,13 +350,13 @@ namespace QuirketyBlogData
 
         public Post AddPost(string newKey, Post newPost)
         {
-            Posts.AddOrUpdate(newKey, key => newPost, (key, oldValue) => newPost);
+            Posts.AddOrUpdate(newKey.ToLower(), key => newPost, (key, oldValue) => newPost);
             return PersistPost(newKey, newPost);
         }
 
         public Post UpdatePost(string updateKey, Post updatePost)
         {
-            Posts.AddOrUpdate(updateKey, key => updatePost, (key, oldValue) => updatePost);
+            Posts.AddOrUpdate(updateKey.ToLower(), key => updatePost, (key, oldValue) => updatePost);
             return PersistPost(updateKey, updatePost);
         }
 
@@ -376,7 +376,7 @@ namespace QuirketyBlogData
         {
             Post post = null;
 
-            bool keyExisted = Posts.TryGetValue(key, out post);
+            bool keyExisted = Posts.TryGetValue((SrcDir + "documents\\" + key).ToLower(), out post);
 
             if (keyExisted == false)
                 return null;
@@ -388,7 +388,7 @@ namespace QuirketyBlogData
         {
             Post deletedPost = null;
 
-            Posts.TryRemove(key, out deletedPost);
+            Posts.TryRemove(key.ToLower(), out deletedPost);
 
         }
     }
