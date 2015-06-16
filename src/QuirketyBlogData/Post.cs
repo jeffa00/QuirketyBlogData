@@ -69,6 +69,10 @@ namespace QuirketyBlogData
                 case MarkdownProcessor.CommonMark:
                     ParsedContent = CommonMarkConverter.Convert(PlainContent);
                     break;
+
+                // MarkdownDeep won't currently work with .Net Core
+                // because it calls Image to get the dimensions of
+                // image files.
                 //case MarkdownProcessor.MarkdownDeep:
                 //    var mdd = new MarkdownDeep.Markdown();
 
